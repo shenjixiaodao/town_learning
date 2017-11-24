@@ -14,6 +14,7 @@ public class Room {
     private Long userId;
     private Date planStartTime;
     private Long duration;
+    //远程通信方式
     private String communication;
 
     public Room(Long id, String name, List<Subject> subjects,

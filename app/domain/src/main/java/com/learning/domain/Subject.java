@@ -5,6 +5,7 @@ package com.learning.domain;
  */
 public class Subject {
 
+    private Integer id;
     private String name;
     private String grade;
 
