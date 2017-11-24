@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+    <Appenders>
+
+        <RollingFile name="app-file" fileName="${sys:user.home}/logs/${sys:app.sysname}/biz.log"
+                     filePattern="${sys:user.home}/logs/${sys:app.sysname}/$${date:yyyy-MM}/biz.log%d{yyyy-MM-dd}-%i.gz">
+            <PatternLayout>
+                <Pattern>[%d{MMdd HH:mm:ss SSS} %-5p] [%t] %c{3} - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="startup-file" fileName="${sys:user.home}/logs/${sys:app.sysname}/startup.log"
+                     filePattern="${sys:user.home}/logs/${sys:app.sysname}/$${date:yyyy-MM}/startup.log%d{yyyy-MM-dd}-%i.gz">
+            <PatternLayout>
+                <Pattern>[%d{MMdd HH:mm:ss SSS} %-5p] [%t] %c{3} - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
+                <SizeBasedTriggeringPolicy size="1 MB"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+        <!-- 配置mybatis的sql语句输出 -->
+        <logger name="dao" additivity="false">
+            <level value="debug" />
+            <appender-ref ref="app-file" />
+        </logger>
+        <logger name="com.ect.musa.web.listener" additivity="false" >
+            <appender-ref ref="startup-file"/>
+        </logger>
+        <Root level="info">
+            <AppenderRef ref="app-file"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
