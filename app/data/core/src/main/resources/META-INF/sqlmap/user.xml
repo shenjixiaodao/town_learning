@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.learning.data.mapper.UserMapper">
+
+    <insert id="addSkilled" parameterType="java.util.Map">
+        INSERT INTO `learning`.`learning_skilled`
+        (`user_id`,
+        `subject_id`,
+        `subject_name`)
+        VALUES
+        (#{userId},
+        #{subject.id},
+        #{subject.name});
+    </insert>
+    
+    <insert id="save" parameterType="com.learning.domain.user.User">
+        INSERT INTO `learning`.`learning_user`
+        (
+        `nickname`,
+        `wechatId`,
+        `role`)
+        VALUES
+        (
+        #{nickname},
+        #{wechatId},
+        #{role});
+    </insert>
+
+    <update id="update" parameterType="com.learning.domain.user.User">
+        UPDATE `learning`.`learning_user`
+        SET id=id
+        <if test="nickname != null">
+            , `nickname` = #{nickname}
+        </if>
+        <if test="role != null">
+            , `role` = #{role}
+        </if>
+        WHERE `id` = #{id};
+    </update>
+
+</mapper>

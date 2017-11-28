@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.learning.data.mapper.AttachmentMapper">
+
+    <insert id="save" parameterType="com.learning.domain.user.Attachment">
+        INSERT INTO `learning`.`learning_attachment`
+        (
+        `user_id`,
+        `name`,
+        `location`,
+        `type`,
+        `is_associated`)
+        VALUES
+        (
+        #{userId},
+        #{name},
+        #{location},
+        #{type},
+        #{isAssociated});
+
+    </insert>
+
+    <update id="update" parameterType="com.learning.domain.user.Attachment">
+        UPDATE `learning`.`learning_attachment`
+        SET id=id
+        <if test="name != null">
+            ,`name` = #{name}
+        </if>
+        <if test="location != null">
+            ,`location` = #{location}
+        </if>
+        <if test="type != null" >
+            ,`type` = #{type}
+        </if>
+        <if test="isAssociated != null">
+            ,`is_associated` = #{isAssociated}
+        </if>
+        WHERE `id` = #{id};
+    </update>
+
+</mapper>

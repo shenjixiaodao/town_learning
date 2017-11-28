@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.learning.data.mapper.RoomMapper">
+
+    <!--<resultMap id="userRM" type="com.ii.domain.user.User">
+        <id property="userId.uid" column="uid" />
+        <collection property="devices" resultMap="deviceRM" />
+    </resultMap>-->
+
+    <insert id="save" parameterType="com.learning.domain.room.Room">
+        INSERT INTO `learning`.`learning_room`
+        (`name`,
+        `user_id`,
+        `plan_start_time`,
+        `duration`,
+        `limit_count`,
+        `subject_id`,
+        `subject_name`,
+        `communication`,
+        `user_nikename`)
+        VALUES
+        (#{name},
+        #{userId},
+        #{planStartTime},
+        #{duration},
+        #{limitCount},
+        #{subject.id},
+        #{subject.name},
+        #{communication},
+        #{nickname});
+    </insert>
+
+
+</mapper>
