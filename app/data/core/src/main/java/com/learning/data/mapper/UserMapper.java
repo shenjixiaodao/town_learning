@@ -10,6 +10,7 @@ import java.util.Map;
 public interface UserMapper {
 
     void save(User user);
+    User find(Long id);
     void update(User user);
     void addSkilled(Map paras);
 }

@@ -7,4 +7,6 @@ import com.learning.domain.room.Room;
  */
 public interface RoomMapper {
     void save(Room room);
+    Room find(Long id);
+    void update(Room room);
 }

@@ -3,33 +3,65 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.learning.data.mapper.RoomMapper">
 
-    <!--<resultMap id="userRM" type="com.ii.domain.user.User">
-        <id property="userId.uid" column="uid" />
-        <collection property="devices" resultMap="deviceRM" />
-    </resultMap>-->
+    <resultMap id="baseRM" type="com.learning.domain.room.Room">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="plan_start_time" property="plan_StartTime" />
+        <result column="duration" property="duration" />
+        <result column="user_id" property="host.id" />
+        <result column="user_nickname" property="host.nickname" />
+        <result column="subject_id" property="subject.id" />
+        <result column="subject_name" property="subject.name" />
+    </resultMap>
+
+    <select id="find" resultMap="baseRM">
+        SELECT * FROM learning_room
+        WHERE id=#{id}
+    </select>
 
     <insert id="save" parameterType="com.learning.domain.room.Room">
         INSERT INTO `learning`.`learning_room`
         (`name`,
         `user_id`,
+        `user_nickname`,
         `plan_start_time`,
         `duration`,
         `limit_count`,
         `subject_id`,
         `subject_name`,
-        `communication`,
-        `user_nikename`)
+        `communication`)
         VALUES
         (#{name},
-        #{userId},
+        #{host.id},
+        #{host.nickname},
         #{planStartTime},
         #{duration},
         #{limitCount},
         #{subject.id},
         #{subject.name},
-        #{communication},
-        #{nickname});
+        #{communication});
     </insert>
+
+    <update id="update" parameterType="com.learning.domain.room.Room">
+        UPDATE `learning`.`learning_room`
+        SET id=id
+        <if test="name != null">
+            , `name` = #{name}
+        </if>
+        <if test="planStartTime != null">
+            , `plan_start_time` = #{planStartTime},
+        </if>
+        <if test="duration != null">
+            , `duration` = #{duration}
+        </if>
+        <if test="limitCount != null">
+            , `limit_count` = #{limitCount}
+        </if>
+        <if test="communication != null">
+            , `communication` = #{communication}
+        </if>
+        WHERE `id` = #{id};
+    </update>
 
 
 </mapper>

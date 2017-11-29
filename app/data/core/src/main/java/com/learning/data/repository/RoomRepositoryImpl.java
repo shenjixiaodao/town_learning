@@ -23,6 +23,11 @@ public class RoomRepositoryImpl implements RoomRepository{
     private ClassmateMapper classmateMapper;
 
     @Override
+    public Room findRoom(Long rid) {
+        return roomMapper.find(rid);
+    }
+
+    @Override
     public void save(Room room) {
         roomMapper.save(room);
     }
@@ -33,5 +38,10 @@ public class RoomRepositoryImpl implements RoomRepository{
         paras.put("roomId", rid);
         paras.put("student", student);
         classmateMapper.save(paras);
+    }
+
+    @Override
+    public void update(Room room) {
+        roomMapper.update(room);
     }
 }

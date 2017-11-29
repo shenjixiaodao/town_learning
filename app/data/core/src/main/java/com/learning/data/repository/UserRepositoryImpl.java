@@ -3,20 +3,22 @@ package com.learning.data.repository;
 import com.learning.data.mapper.AttachmentMapper;
 import com.learning.data.mapper.CommentMapper;
 import com.learning.data.mapper.UserMapper;
-import com.learning.domain.room.Subject;
+import com.learning.domain.subject.Subject;
 import com.learning.domain.user.Attachment;
 import com.learning.domain.user.Comment;
 import com.learning.domain.user.User;
 import com.learning.domain.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
 /**
- * Created by jinhui on 2017/11/27.
+ * Created by shenjixiaodao on 2017/11/27.
  */
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
@@ -29,6 +31,11 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void addUser(User user) {
         userMapper.save(user);
+    }
+
+    @Override
+    public User findUser(Long uid) {
+        return userMapper.find(uid);
     }
 
     @Override
