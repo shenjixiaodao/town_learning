@@ -6,6 +6,8 @@ import com.learning.domain.subject.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by shenjixiaodao on 2017/11/29.
  */
@@ -18,5 +20,10 @@ public class SubjectRepositoryImpl implements SubjectRepository {
     @Override
     public Subject find(Integer id) {
         return subjectMapper.find(id);
+    }
+
+    @Override
+    public List<Subject> findByIds(List<Integer> ids) {
+        return subjectMapper.findByIds(ids);
     }
 }

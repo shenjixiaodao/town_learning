@@ -10,8 +10,10 @@ import com.learning.domain.user.User;
 import com.learning.domain.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -40,12 +42,20 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void addAttachment(Attachment attachment) {
+        if(StringUtils.isEmpty(attachment.location())) {
+            throw new IllegalArgumentException("附件存放路径为空");
+        }
         attachmentMapper.save(attachment);
     }
 
     @Override
     public void bindAttachment(Attachment attachment) {
         attachmentMapper.update(attachment);
+    }
+
+    @Override
+    public List<Attachment> findAttachmentsByIds(List<Long> ids) {
+        return attachmentMapper.findAttachmentsByIds(ids);
     }
 
     @Override

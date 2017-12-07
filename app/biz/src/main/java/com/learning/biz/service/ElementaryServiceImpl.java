@@ -48,32 +48,45 @@ public class ElementaryServiceImpl implements ElementaryService {
 
     @Override
     public void registerUser(User user) {
-
+        userRepository.addUser(user);
     }
 
     @Override
-    public void applyForTeacher(User user, List<Long> attachmentIds) {
-
+    @Transactional
+    public void applyForTeacher(Long userId, List<Long> attachmentIds) {
+        User user = userRepository.findUser(userId);
+        List<Attachment> attachments = userRepository.findAttachmentsByIds(attachmentIds);
+        user.applyForTeacher(attachments, userRepository);
     }
 
     @Override
-    public void approve2Teacher(User student) {
-
+    public void approve2Teacher(Long uid) {
+        User user = userRepository.findUser(uid);
+        user.approved(userRepository);
     }
 
     @Override
-    public void skilledIn(User user, List<Integer> subjectIds) {
-
+    @Transactional
+    public void skilledIn(Long uid, List<Integer> subjectIds) {
+        User user = userRepository.findUser(uid);
+        List<Subject> subjects = subjectRepository.findByIds(subjectIds);
+        for(Subject subject:subjects){
+            user.addSkilled(subject, userRepository);
+        }
     }
 
     @Override
-    public void commentTutorship(User student, User teacher, Integer star,
+    @Transactional
+    public void commentTutorship(Long studentId, Long teacherId, Integer star,
                                  @Nullable String keyword, @Nullable String comment) {
-
+        User student = userRepository.findUser(studentId);
+        User teacher = userRepository.findUser(teacherId);
+        student.comment(teacher, star, keyword, comment, userRepository);
     }
 
     @Override
-    public void uploadAttachment(User user, String name, String parentDir, Attachment.Type type) {
-
+    @Transactional
+    public void uploadAttachment(Attachment attachment) {
+        userRepository.addAttachment(attachment);
     }
 }

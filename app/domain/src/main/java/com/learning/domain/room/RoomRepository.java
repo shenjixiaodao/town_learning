@@ -7,6 +7,8 @@ import com.learning.domain.user.User;
  */
 public interface RoomRepository {
 
+    Room findRoom(Long rid);
     void save(Room room);
     void addStudent(Long rid, User student);
+    void update(Room room);
 }

@@ -1,6 +1,6 @@
 package com.learning.domain.user;
 
-import com.learning.domain.room.Subject;
+import com.learning.domain.subject.Subject;
 
 import java.util.List;
 
@@ -10,14 +10,15 @@ import java.util.List;
 public interface UserRepository {
 
     void addUser(User user);
+    User findUser(Long uid);
+    void updateUser(User user);
     void addAttachment(Attachment attachment);
     /**
      * 将上传成功的附件正式地绑定到{@link User}上
      * @param attachment
      */
     void bindAttachment(Attachment attachment);
-
-    void updateUser(User user);
+    List<Attachment> findAttachmentsByIds(List<Long> ids);
 
     void addSkilledSubject(Long uid, Subject subject);
 

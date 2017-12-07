@@ -15,4 +15,12 @@
         WHERE id=#{id}
     </select>
 
+    <select id="findByIds" parameterType="java.util.List" resultMap="baseRM">
+        SELECT * FROM learning_subject
+        WHERE id
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
 </mapper>

@@ -1,6 +1,11 @@
 package com.learning.domain.user;
 
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
+
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by shenjixiaodao on 2017/11/24.
@@ -16,12 +21,6 @@ public class Attachment {
     //上传附件是否被使用: 0:未被关联, 1:是被关联
     private Integer isAssociated;
     private final static int Associated = 1, Unassociated = 0;
-
-    public Attachment(Long id, Type type) {
-        this.id = id;
-        this.type = type;
-        this.isAssociated = Unassociated;
-    }
 
     public Attachment(Long userId, String name, Type type) {
         this.userId = userId;
@@ -68,6 +67,16 @@ public class Attachment {
         public String lowcaseName() {
             return this.toString().toLowerCase();
         }
+        public static Type typeOf(String type) {
+            if(StringUtils.isEmpty(type)) {
+                throw new IllegalArgumentException("type不能为空");
+            }
+            for(Type t:Type.values()) {
+                if(t.lowcaseName().equals(type.toLowerCase()))
+                    return t;
+            }
+            throw new IllegalArgumentException("位置附件类型");
+        }
     }
 
     public String fileLocation(String parentDir) {
@@ -76,6 +85,11 @@ public class Attachment {
             dir.mkdir();
         }
         return dir.getAbsolutePath() + File.separator + this.name;
+    }
+
+    public static String toStoreFilename(String srcFilename) {
+        String fileType = srcFilename.substring(srcFilename.lastIndexOf("."));
+        return new SimpleDateFormat("yyyyMMddHHmmssSSSS").format(new Date()) + fileType;
     }
 
     Attachment() {

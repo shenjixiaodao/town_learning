@@ -1,6 +1,6 @@
 package com.learning.domain.user;
 
-import com.learning.domain.room.Subject;
+import com.learning.domain.subject.Subject;
 import org.springframework.util.Assert;
 
 import javax.annotation.Nullable;
@@ -113,5 +113,8 @@ public class User {
         public String text() {
             return this.text;
         }
+    }
+
+    User() {
     }
 }
