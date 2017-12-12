@@ -41,6 +41,8 @@
         <commons.beanutils.version>1.9.3</commons.beanutils.version>
         <fastjson.version>1.2.6</fastjson.version>
         <swagger.version>2.5.0</swagger.version>
+        <common.fileupload.version>1.2.1</common.fileupload.version>
+        <common.io>1.4</common.io>
     </properties>
 
     <dependencyManagement>
@@ -195,6 +197,18 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context-support</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${common.fileupload.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${common.io}</version>
             </dependency>
 
             <dependency>

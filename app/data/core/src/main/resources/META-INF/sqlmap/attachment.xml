@@ -12,7 +12,7 @@
         <result column="is_associated" property="isAssociated" />
     </resultMap>
 
-    <insert id="save" parameterType="com.learning.domain.user.Attachment">
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.learning.domain.user.Attachment">
         INSERT INTO `learning`.`learning_attachment`
         (
         `user_id`,

@@ -1,8 +1,7 @@
 package com.learning.domain.user;
 
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
+import org.springframework.util.StringUtils;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +26,10 @@ public class Attachment {
         this.name = name;
         this.type = type;
         this.isAssociated = Unassociated;
+    }
+
+    public Long id() {
+        return id;
     }
 
     /**

@@ -11,4 +11,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/room")
 @Api(value = "room", description = "房间相关接口")
 public class RoomApi {
+
 }
